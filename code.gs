@@ -217,7 +217,7 @@ function refreshToken(sheet) {
 
 // Returns URI for STEP 1
 function buildAuthorizingURI() {
-  return `https://login.xero.com/identity/connect/authorize?response_type=code&client_id=${XERO_CLIENT_ID}&redirect_uri=${XERO_REDIRECT_URI}&scope=accounting.transactions.read accounting.reports.read accounting.settings.read&state=xero-gsheet`;
+  return `https://login.xero.com/identity/connect/authorize?response_type=code&client_id=${XERO_CLIENT_ID}&redirect_uri=${XERO_REDIRECT_URI}&scope=accounting.transactions.read%20accounting.reports.read%20accounting.settings.read%20offline_access&state=xero-gsheet`;
 }
 
 function fetchStatement(sheet, accountID) {
