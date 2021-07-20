@@ -99,7 +99,7 @@ function makeXeroAPIGETWithTenantId(url, params) {
 function getAccessToken(sheet) {
   var range = sheet.getRange('B2:B2');
   var access_token = range.getValue();
-  if (access_token == '') {
+  if (access_token == '' || access_token === undefined) {
     const fetch_url = 'https://identity.xero.com/connect/token';
     const options = {
       'method': 'post',
@@ -135,6 +135,7 @@ function getAccessToken(sheet) {
       Logger.log(response.getContentText());
     } else {
       Logger.log('XERO Call - Fetched Access Token: ' + access_token);
+      Logger.log(responseJSON);
     }
   } else {
     Logger.log('Use Access Token from the spreadsheet :' + access_token);
@@ -147,7 +148,7 @@ function getTenantId(sheet) {
   // first attempt to fetch value from a spreadsheet
   var range = sheet.getRange('B4:B4');
   var tenantId = range.getValue();
-  if (tenantId == '') {
+  if (tenantId == '' || tenantId === undefined) {
     // if tenantId has not been fetched
     var resp = makeXeroAPIGET('https://api.xero.com/connections', undefined);
     Logger.log(resp);
@@ -165,7 +166,7 @@ function getAccountID(sheet) {
   // first attempt to fetch value from a spreadsheet
   var range = sheet.getRange('B1:B1');
   var accountID = range.getValue();
-  if (accountID == '') {
+  if (accountID == '' || accountID === undefined) {
     // if accountID has not been fetched
     var resp = makeXeroAPIGETWithTenantId('https://api.xero.com/api.xro/2.0/Reports/BankSummary', undefined);
     Logger.log(resp);
